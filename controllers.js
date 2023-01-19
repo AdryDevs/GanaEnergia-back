@@ -26,6 +26,11 @@ datosController.submitForm = async (req, res) => {
 // Cp por localidad
 datosController.getByMunicipio = async (req, res) => {
     try {
+        const client = new MongoClient(url);
+        await client.connect();
+        const db = client.db(dbName);
+        const formCollection = db.collection(dbName);
+        const forms = await formCollection.find().toArray();
         const formData = await Form.findOne({ municipio_nombre: req.params.municipio_nombre });
         if (formData) {
             res.json(formData.cp);
