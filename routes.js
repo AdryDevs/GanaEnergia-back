@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { submitForm, getByMunicipio  } = require('./controllers');
-const { getAllForms } = require('./models/form');
+const { submitForm, getByMunicipio, getAllForms  } = require('./controllers');
+
 
 
 

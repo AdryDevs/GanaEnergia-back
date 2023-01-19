@@ -10,7 +10,7 @@ class Form {
         this.apellido1 = formData.apellido1;
         this.apellido2 = formData.apellido2;
         this.documento = formData.documento;
-        this.localidad = formData.localidad;
+        this.municipio_nombre = formData.municipio_nombre;
         this.cp = formData.cp;
         this.telefono = formData.telefono; 
     }
@@ -23,29 +23,13 @@ class Form {
             const db = client.db(dbName);
             const formCollection = db.collection(dbName);
             await formCollection.insertOne(this);
+            console.log("formulario guardado");
             client.close();
         } catch (err) {
             console.log("error al guardar el formulario en save");
             console.log(err);
         }
     };
-
-    static async getAllForms() {
-        try {
-            const client = new MongoClient(url);
-            await client.connect();
-            const db = client.db(dbName);
-            const formCollection = db.collection(dbName);
-            const forms = await formCollection.find().toArray();
-            client.close();
-            return forms;
-        }
-        catch (err) {
-            console.log("error al buscar los formularios en getAllForms");
-            console.log(err);
-        }
-    }
-
 
     static async getPostalCode(municipio_nombre) {
         const client = new MongoClient(url);
